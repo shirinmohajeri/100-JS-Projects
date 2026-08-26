@@ -8,8 +8,13 @@ This project was created as part of my **100 JavaScript Projects** learning jour
 
 ## 📸 Preview
 
-![Tip Calculator Preview](./https://raw.githubusercontent.com/shirinmohajeri/100-JS-Projects/refs/heads/main/01-Tip-Calculator/1.jpg)
+## 📸 Preview
 
+<p align="center">
+  <img src="./1.jpg" width="30%" />
+  <img src="./2.jpg" width="30%" />
+  <img src="./3.jpg" width="30%" />
+</p>
 ---
 
 ## ✨ Features
