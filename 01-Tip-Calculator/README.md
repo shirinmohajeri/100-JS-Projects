@@ -8,8 +8,6 @@ This project was created as part of my **100 JavaScript Projects** learning jour
 
 ## 📸 Preview
 
-## 📸 Preview
-
 <p align="center">
   <img src="./1.jpg" width="30%" />
   <img src="./2.jpg" width="30%" />
