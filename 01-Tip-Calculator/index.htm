@@ -1,0 +1,333 @@
+<!--
+    CSS / HTML selector basics:
+
+    #name       → id selector
+    .name       → class selector
+    input       → HTML element / tag selector
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <!--
+        Makes the website responsive on different screen sizes.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+        The title displayed in the browser tab.
+    -->
+    <title>Tip Calculator</title>
+
+    <!--
+        Connect the CSS file to this HTML file.
+    -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <!--
+        Main glass card.
+
+        This container groups the complete Tip Calculator
+        so we can create a modern glassmorphism design
+        with CSS.
+    -->
+    <div class="calculator-card">
+
+
+        <!-- ====================================================
+             TITLE & DESCRIPTION
+             ==================================================== -->
+
+        <!--
+            Main heading of the Tip Calculator.
+        -->
+        <h1 class="title">
+            Tip Calculator
+        </h1>
+
+
+        <!--
+            Short description explaining what the calculator does.
+        -->
+        <h3 class="description">
+            Enter the bill amount and tip percentage to calculate the total
+        </h3>
+
+
+
+        <!-- ====================================================
+             FORM
+             ==================================================== -->
+
+        <!--
+            The form contains all the inputs and the Calculate button.
+
+            We use JavaScript later to:
+
+            1. Get the input values.
+            2. Validate the values.
+            3. Calculate the tip.
+            4. Calculate the total amount.
+        -->
+        <form id="tip-form">
+
+
+            <!-- ==================================================
+                 BILL AMOUNT
+                 ================================================== -->
+
+            <!--
+                Bill amount field.
+
+                The input-group keeps the label and input together
+                so we can style them as one section.
+            -->
+            <div class="input-group">
+
+
+                <!--
+                    Label for the bill amount input.
+
+                    The "for" attribute connects this label
+                    to the input with id="bill".
+                -->
+                <label for="bill">
+                    Bill amount:
+                </label>
+
+
+                <!--
+                    The user enters the bill amount here.
+
+                    type="number" allows the user to enter
+                    numeric values instead of regular text.
+
+                    min="0" prevents values below zero
+                    through the HTML input controls.
+
+                    step="0.01" allows decimal values
+                    such as 25.50 or 100.75.
+
+                    placeholder provides an example
+                    of what the user can enter.
+                -->
+                <input
+                    type="number"
+                    id="bill"
+                    name="amount"
+                    min="0"
+                    step="0.01"
+                    placeholder="e.g. 100.00"
+                >
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 TIP PERCENTAGE
+                 ================================================== -->
+
+            <!--
+                Tip percentage field.
+
+                The input-group keeps the label and input together
+                so we can style them consistently.
+            -->
+            <div class="input-group">
+
+
+                <!--
+                    Label for the tip percentage input.
+
+                    The "for" attribute connects this label
+                    to the input with id="tip".
+                -->
+                <label for="tip">
+                    Tip percentage:
+                </label>
+
+
+                <!--
+                    The user enters the tip percentage here.
+
+                    type="number" allows numeric values.
+
+                    min="0" prevents negative tip percentages.
+
+                    max="100" prevents tip percentages
+                    greater than 100%.
+
+                    step="1" means the tip percentage
+                    increases by whole numbers.
+
+                    placeholder provides an example
+                    of what the user can enter.
+                -->
+                <input
+                    type="number"
+                    id="tip"
+                    name="percentage"
+                    min="0"
+                    max="100"
+                    step="1"
+                    placeholder="e.g. 15"
+                >
+
+            </div>
+
+
+
+            <!-- ==================================================
+                 ERROR MESSAGE
+                 ================================================== -->
+
+            <!--
+                This element will display validation error messages.
+
+                JavaScript changes the textContent of this element
+                when the user enters invalid values.
+            -->
+            <p id="error-message"></p>
+
+
+
+            <!-- ==================================================
+                 CALCULATE BUTTON
+                 ================================================== -->
+
+            <!--
+                Submit button.
+
+                When the user clicks this button,
+                the form will be submitted.
+
+                JavaScript listens for the "submit" event
+                and performs the calculation.
+            -->
+            <input
+                type="submit"
+                value="Calculate"
+            >
+
+
+
+            <!-- ====================================================
+                 RESULTS
+                 ==================================================== -->
+
+            <!--
+                Result cards.
+
+                JavaScript will update the values
+                inside these cards after the user
+                clicks the Calculate button.
+
+                The results contain:
+
+                1. Tip Amount
+                2. Total Amount
+            -->
+            <div class="results-container">
+
+
+                <!-- ================= Tip Card ================= -->
+
+                <!--
+                    This card displays the calculated
+                    tip amount.
+                -->
+                <div class="result-card">
+
+
+                    <!--
+                        Small label describing
+                        the calculated value.
+                    -->
+                    <p class="result-label">
+                        💰 Tip Amount
+                    </p>
+
+
+                    <!--
+                        JavaScript changes this value
+                        after the calculation.
+
+                        Example:
+                        €15
+                    -->
+                    <h2 id="tip-result">
+                        €0
+                    </h2>
+
+                </div>
+
+
+
+                <!-- ================= Total Card ================= -->
+
+                <!--
+                    This card displays the final
+                    bill amount including the tip.
+                -->
+                <div class="result-card">
+
+
+                    <!--
+                        Small label describing
+                        the calculated value.
+                    -->
+                    <p class="result-label">
+                        🧾 Total Amount
+                    </p>
+
+
+                    <!--
+                        JavaScript changes this value
+                        after the calculation.
+
+                        Example:
+                        €115
+                    -->
+                    <h2 id="total-result">
+                        €0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+
+    <!--
+        Connect the JavaScript file to this HTML file.
+
+        The JavaScript file contains:
+
+        - DOM selection
+        - Form submission
+        - Validation
+        - Tip calculation
+        - Total calculation
+        - Result display
+    -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

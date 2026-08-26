@@ -1,0 +1,1463 @@
+/* ============================================================
+   TIP CALCULATOR — STYLE SHEET
+   ============================================================ */
+
+
+/* ============================================================
+   1. Page Setup & Background
+   ============================================================ */
+
+
+/*
+   Remove the default margin from the browser.
+*/
+body {
+
+    margin: 0;
+
+
+    /*
+       Use Flexbox to center the calculator card
+       horizontally and vertically.
+    */
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+
+    /*
+       Make the body at least as tall as the screen.
+    */
+    min-height: 100vh;
+
+
+    /*
+       Dark luxury background.
+
+       The gradient combines:
+       - Dark Brown
+       - Warm Brown
+       - Soft Beige
+       - Deep Green
+
+       These colors create a warm luxury
+       background for the glass calculator.
+    */
+    background: linear-gradient(
+        135deg,
+        #2B211B 0%,
+        #5A4028 50%,
+        #AFAAA4 70%,
+        #405542 100%
+    );
+
+
+    /*
+       Use a modern system font.
+
+       This gives the calculator a clean
+       and readable appearance.
+    */
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+
+    /*
+       Makes width and height calculations easier.
+    */
+    box-sizing: border-box;
+}
+
+
+/*
+   Make sure the box-sizing rule also applies
+   to all elements and their pseudo-elements.
+*/
+*,
+*::before,
+*::after {
+
+    box-sizing: border-box;
+}
+
+
+
+/* ============================================================
+   2. Main Glass Calculator Card
+   ============================================================ */
+
+
+/*
+   Main glass card.
+
+   This container contains:
+   - Title
+   - Description
+   - Form
+   - Inputs
+   - Button
+   - Error / Success message
+   - Results
+
+   We use Glassmorphism to create
+   a transparent glass appearance.
+*/
+.calculator-card {
+
+    /*
+       Make the card responsive.
+    */
+    width: 100%;
+
+
+    /*
+       Prevent the card from becoming too wide
+       on large screens.
+    */
+    max-width: 500px;
+
+
+    /*
+       Add space inside the card.
+    */
+    padding: 40px;
+
+
+    /*
+       Required for the ::before
+       glass reflection.
+    */
+    position: relative;
+
+
+    /*
+       Transparent dark glass background.
+    */
+    background: rgba(30, 30, 30, 0.18);
+
+
+    /*
+       Thin semi-transparent white border.
+    */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+
+    /*
+       Rounded corners.
+    */
+    border-radius: 28px;
+
+
+    /*
+       Blur the background behind the card.
+
+       This is one of the main parts
+       of the Glassmorphism effect.
+    */
+    backdrop-filter: blur(50px);
+
+
+    /*
+       WebKit browser support.
+    */
+    -webkit-backdrop-filter: blur(30px);
+
+
+    /*
+       Soft shadow underneath the glass.
+    */
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.35);
+
+
+    /*
+       Hide anything outside
+       the rounded card.
+    */
+    overflow: hidden;
+
+
+    /*
+       Smooth animation for interactions.
+    */
+    transition: all 0.3s ease;
+}
+
+
+
+/* ============================================================
+   2.1. Glass Reflection
+   ============================================================ */
+
+
+/*
+   Create a subtle light reflection
+   across the glass surface.
+*/
+.calculator-card::before {
+
+    /*
+       Required for a pseudo-element.
+    */
+    content: "";
+
+
+    /*
+       Position the reflection
+       inside the calculator card.
+    */
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+
+    /*
+       Cover the entire card.
+    */
+    width: 100%;
+
+    height: 100%;
+
+
+    /*
+       Very subtle white gradient.
+
+       The low opacity keeps the card
+       transparent instead of solid.
+    */
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.04),
+        rgba(255, 255, 255, 0.01) 40%,
+        transparent 70%
+    );
+
+
+    /*
+       Match the card's rounded corners.
+    */
+    border-radius: 28px;
+
+
+    /*
+       Prevent the reflection from
+       blocking inputs and buttons.
+    */
+    pointer-events: none;
+
+
+    /*
+       Put the reflection behind
+       the actual card content.
+    */
+    z-index: 0;
+}
+
+
+
+/* ============================================================
+   2.2. Keep Card Content Above Reflection
+   ============================================================ */
+
+
+/*
+   Keep all calculator content
+   above the glass reflection.
+*/
+.calculator-card > * {
+
+    position: relative;
+
+    z-index: 1;
+}
+
+
+
+/* ============================================================
+   3. Modern Title
+   ============================================================ */
+
+
+/*
+   Main heading of the Tip Calculator.
+*/
+.title {
+
+    /*
+       Remove the default top margin.
+    */
+    margin-top: 0;
+
+
+    /*
+       Center the title.
+    */
+    text-align: center;
+
+
+    /*
+       Soft cream color.
+    */
+    color: #FAF8F3;
+
+
+    /*
+       Large heading.
+    */
+    font-size: 2.5rem;
+
+
+    /*
+       Strong font weight.
+    */
+    font-weight: 700;
+
+
+    /*
+       Subtle warm shadow.
+    */
+    text-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/* ============================================================
+   3.1. Description
+   ============================================================ */
+
+
+/*
+   Short description below the title.
+*/
+.description {
+
+    /*
+       Add space around the description.
+    */
+    margin: 12px 0 32px;
+
+
+    /*
+       Center the text.
+    */
+    text-align: center;
+
+
+    /*
+       Golden color creates a warm
+       contrast against the dark glass.
+    */
+    color: goldenrod;
+
+
+    /*
+       Comfortable text size.
+    */
+    font-size: 0.95rem;
+
+
+    /*
+       Improve readability.
+    */
+    line-height: 1.5;
+
+
+    /*
+       Normal font weight.
+    */
+    font-weight: 400;
+
+
+    /*
+       Slightly slanted text style.
+    */
+    font-style: oblique;
+}
+
+
+
+/* ============================================================
+   4. Input Groups
+   ============================================================ */
+
+
+/*
+   Each input-group contains:
+
+   1. Label
+   2. Input
+*/
+.input-group {
+
+    /*
+       Add space below each input group.
+    */
+    margin-bottom: 20px;
+}
+
+
+
+/* ============================================================
+   4.1. Input Labels
+   ============================================================ */
+
+
+/*
+   Style the labels above the input fields.
+*/
+.input-group label {
+
+    /*
+       Make the label occupy
+       its own line.
+    */
+    display: block;
+
+
+    /*
+       Add space between label and input.
+    */
+    margin-bottom: 8px;
+
+
+    /*
+       Soft cream color.
+    */
+    color: #FAF8F3;
+
+
+    /*
+       Slightly thicker text.
+    */
+    font-weight: 600;
+
+
+    /*
+       Comfortable text size.
+    */
+    font-size: 0.95rem;
+}
+
+
+
+/* ============================================================
+   4.2. Glass Input Fields
+   ============================================================ */
+
+
+/*
+   Style both the bill and tip inputs.
+*/
+.input-group input {
+
+    /*
+       Use the full available width.
+    */
+    width: 100%;
+
+
+    /*
+       Add space inside the input.
+    */
+    padding: 14px 16px;
+
+
+    /*
+       Transparent white glass background.
+    */
+    background: rgba(255, 255, 255, 0.10);
+
+
+    /*
+       Subtle transparent border.
+    */
+    border: 1px solid rgba(255, 255, 255, 0.30);
+
+
+    /*
+       Round the input corners.
+    */
+    border-radius: 12px;
+
+
+    /*
+       Cream text.
+    */
+    color: #FAF8F3;
+
+
+    /*
+       Comfortable text size.
+    */
+    font-size: 1rem;
+
+
+    /*
+       Remove the browser's default outline.
+
+       We create our own focus style below.
+    */
+    outline: none;
+
+
+    /*
+       Include padding and border
+       inside the declared width.
+    */
+    box-sizing: border-box;
+
+
+    /*
+       Smoothly animate input changes.
+    */
+    transition: all 0.3s ease;
+}
+
+
+
+/* ============================================================
+   4.3. Input Placeholder
+   ============================================================ */
+
+
+/*
+   Style placeholder text inside inputs.
+*/
+.input-group input::placeholder {
+
+    /*
+       Soft cream with transparency.
+    */
+    color: rgba(250, 248, 243, 0.55);
+}
+
+
+
+/* ============================================================
+   4.4. Input Focus Effect
+   ============================================================ */
+
+
+/*
+   :focus applies when the user
+   clicks inside an input field.
+*/
+.input-group input:focus {
+
+    /*
+       Nude Beige active border.
+    */
+    border-color: #C8B79A;
+
+
+    /*
+       Soft glow around the active input.
+    */
+    box-shadow:
+        0 0 0 3px rgba(200, 183, 154, 0.18);
+}
+
+
+
+/* ============================================================
+   4.5. Validation Message
+   ============================================================ */
+
+
+/*
+   This element displays validation messages.
+
+   JavaScript will later add either:
+
+   .success → valid calculation
+   .error   → invalid input
+
+   The class controls the visual state.
+*/
+#error-message {
+
+    /*
+       Add space around the message.
+    */
+    margin: 8px 0 20px;
+
+
+    /*
+       Add space inside the message.
+    */
+    padding: 10px 14px;
+
+
+    /*
+       Round the message box.
+    */
+    border-radius: 12px;
+
+
+    /*
+       Center the message text.
+    */
+    text-align: center;
+
+
+    /*
+       Make the message readable.
+    */
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+
+    /*
+       Prepare the gradient for animation.
+
+       The background is twice as wide
+       as the element so background-position
+       can move the gradient.
+    */
+    background-size: 200% 100%;
+
+
+    /*
+       Smooth animation between states.
+    */
+    transition: all 0.3s ease;
+}
+
+
+
+/* ============================================================
+   4.6. Success State
+   ============================================================ */
+
+
+/*
+   .success represents valid input.
+
+   JavaScript will later add this class
+   after a successful calculation.
+*/
+#error-message.success {
+
+    /*
+       Deep Teal / Green gradient.
+    */
+    background: linear-gradient(
+        90deg,
+        #405542,
+        #2F6F68,
+        #6F8F72
+    );
+
+
+    /*
+       Start the gradient from the left.
+    */
+    background-position: 0%;
+
+
+    /*
+       Light text for good contrast.
+    */
+    color: #F4F8F2;
+
+
+    /*
+       Green / Deep Teal border.
+    */
+    border: 1px solid rgba(111, 143, 114, 0.55);
+}
+
+
+
+/* ============================================================
+   4.7. Success Hover
+   ============================================================ */
+
+
+/*
+   Success hover effect.
+
+   This uses the same technique
+   from your btn11 example.
+*/
+#error-message.success:hover {
+
+    /*
+       Move the gradient to the right.
+
+       This creates a visual animation.
+    */
+    background-position: 100%;
+
+
+    /*
+       Slightly enlarge the message.
+    */
+    transform: scale(1.08);
+}
+
+
+
+/* ============================================================
+   4.8. Error State
+   ============================================================ */
+
+
+/*
+   .error represents invalid input.
+
+   JavaScript will later add this class
+   when validation fails.
+*/
+#error-message.error {
+
+    /*
+       Burnt Orange gradient.
+    */
+    background: linear-gradient(
+        90deg,
+        #7A3518,
+        #B85C2E,
+        #D9824B
+    );
+
+
+    /*
+       Start the gradient from the left.
+    */
+    background-position: 0%;
+
+
+    /*
+       Light text for good contrast.
+    */
+    color: #FFF3EA;
+
+
+    /*
+       Burnt Orange border.
+    */
+    border: 1px solid rgba(217, 130, 75, 0.60);
+}
+
+
+
+/* ============================================================
+   4.9. Error Hover
+   ============================================================ */
+
+
+/*
+   Error hover effect.
+
+   Same animation technique as
+   the success state.
+*/
+#error-message.error:hover {
+
+    /*
+       Move the gradient to the right.
+    */
+    background-position: 100%;
+
+
+    /*
+       Slightly enlarge the message.
+    */
+    transform: scale(1.08);
+}
+
+
+
+/* ============================================================
+   5. Calculate Button
+   ============================================================ */
+
+
+/*
+   The Calculate button is actually:
+
+   <input type="submit">
+
+   Therefore we select it using:
+
+   input[type="submit"]
+*/
+input[type="submit"] {
+
+    /*
+       Make the button use the full width
+       of the form.
+    */
+    width: 100%;
+
+
+    /*
+       Add space inside the button.
+    */
+    padding: 14px 20px;
+
+
+    /*
+       Remove the default browser border.
+    */
+    border: none;
+
+
+    /*
+       Round the button corners.
+    */
+    border-radius: 14px;
+
+
+    /*
+       Nude / Cream gradient.
+
+       This connects the button
+       with the overall color palette.
+    */
+    background: linear-gradient(
+        135deg,
+        #FAF8F3,
+        #C8B79A
+    );
+
+
+    /*
+       Warm dark brown text.
+    */
+    color: rgb(68, 60, 49);
+
+
+    /*
+       Make the text slightly thicker.
+    */
+    font-weight: 700;
+
+
+    /*
+       Increase the text size.
+    */
+    font-size: 1rem;
+
+
+    /*
+       Change the mouse cursor
+       to a pointer.
+    */
+    cursor: pointer;
+
+
+    /*
+       Soft shadow under the button.
+    */
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.18);
+
+
+    /*
+       Smooth animation.
+    */
+    transition: all 0.3s ease;
+}
+
+
+
+/* ============================================================
+   5.1. Calculate Button Hover
+   ============================================================ */
+
+
+/*
+   :hover applies when the mouse
+   pointer is over the button.
+*/
+input[type="submit"]:hover {
+
+    /*
+       Move the button slightly upward.
+    */
+    transform: translateY(-3px);
+
+
+    /*
+       Stronger shadow creates
+       an elevated effect.
+    */
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/* ============================================================
+   5.2. Calculate Button Active
+   ============================================================ */
+
+
+/*
+   :active applies while the user
+   is pressing the button.
+*/
+input[type="submit"]:active {
+
+    /*
+       Move the button back down.
+    */
+    transform: translateY(0);
+}
+
+
+/* ============================================================
+   5.3. Button Validation States
+   ============================================================ */
+
+
+/*
+   The Calculate button can have two different states:
+
+   .success → The user's input is valid.
+   .error   → The user's input is invalid.
+
+   JavaScript adds and removes these classes
+   using classList.add() and classList.remove().
+*/
+
+
+/* ============================================================
+   5.3.1. Success State — Deep Teal
+   ============================================================ */
+
+
+/*
+   When the calculation is successful,
+   the button gets the "success" class.
+
+   We use a Deep Teal gradient to visually
+   communicate that the input is valid.
+*/
+
+input[type="submit"].success {
+
+    /*
+       Create a Deep Teal gradient.
+
+       Multiple colors allow us to animate
+       the gradient using background-position.
+    */
+    background: linear-gradient(
+        90deg,
+        #164E4A,
+        #2A7870,
+        #4FA39A,
+        #2A7870,
+        #164E4A
+    );
+
+
+    /*
+       Make the gradient larger than the button.
+
+       This is necessary because later
+       background-position will move the gradient.
+    */
+    background-size: 200% 100%;
+
+
+    /*
+       Move the gradient to the right.
+
+       This creates the graphical effect
+       you wanted from btn11.
+    */
+    background-position: 100%;
+
+
+    /*
+       Use a light color for better contrast
+       against the dark teal background.
+    */
+    color: #FAF8F3;
+
+
+    /*
+       Add a Deep Teal glow around the button.
+    */
+    box-shadow:
+        0 0 10px rgba(42, 120, 112, 0.50),
+        0 0 30px rgba(42, 120, 112, 0.30);
+
+
+    /*
+       Slightly increase the button size.
+
+       This gives the successful state
+       a stronger graphical effect.
+    */
+    transform: scale(1.02);
+}
+
+
+/* ============================================================
+   5.3.2. Success Hover
+   ============================================================ */
+
+
+/*
+   When the user moves the mouse over
+   a successful button, increase the effect.
+*/
+
+input[type="submit"].success:hover {
+
+    /*
+       Move the gradient further across the button.
+    */
+    background-position: 100%;
+
+
+    /*
+       Scale the button up slightly.
+
+       This is the technique from your
+       btn11 hover example.
+    */
+    transform: scale(1.08);
+
+
+    /*
+       Stronger Deep Teal neon glow.
+    */
+    box-shadow:
+        0 0 10px #2A7870,
+        0 0 30px #2A7870,
+        0 0 60px rgba(42, 120, 112, 0.45);
+}
+
+
+
+/* ============================================================
+   5.3.3. Error State — Burnt Orange
+   ============================================================ */
+
+
+/*
+   When validation fails,
+   JavaScript adds the "error" class.
+
+   Burnt Orange gives the user
+   a strong visual warning.
+*/
+
+input[type="submit"].error {
+
+    /*
+       Create a Burnt Orange gradient.
+
+       Multiple color stops make the animation
+       more visible and graphical.
+    */
+    background: linear-gradient(
+        90deg,
+        #7C2D12,
+        #C2410C,
+        #E66A2C,
+        #C2410C,
+        #7C2D12
+    );
+
+
+    /*
+       Make the gradient larger than the button
+       so background-position can move it.
+    */
+    background-size: 200% 100%;
+
+
+    /*
+       Start the gradient from the right side.
+    */
+    background-position: 100%;
+
+
+    /*
+       Use a light color for readability.
+    */
+    color: #FAF8F3;
+
+
+    /*
+       Add a Burnt Orange glow.
+    */
+    box-shadow:
+        0 0 10px rgba(194, 65, 12, 0.50),
+        0 0 30px rgba(194, 65, 12, 0.30);
+
+
+    /*
+       Slightly increase the button size.
+    */
+    transform: scale(1.02);
+}
+
+
+
+/* ============================================================
+   5.3.4. Error Hover
+   ============================================================ */
+
+
+/*
+   When the mouse moves over an error button,
+   make the Burnt Orange effect stronger.
+*/
+
+input[type="submit"].error:hover {
+
+    /*
+       Move the gradient to the right.
+    */
+    background-position: 100%;
+
+
+    /*
+       Use the btn11 technique:
+       increase the button size.
+    */
+    transform: scale(1.08);
+
+
+    /*
+       Create a stronger Burnt Orange glow.
+    */
+    box-shadow:
+        0 0 10px #C2410C,
+        0 0 30px #C2410C,
+        0 0 60px rgba(194, 65, 12, 0.45);
+}
+
+                        /* JavaScript
+                               ↓
+                         classList.add()
+                         classList.remove()
+                                ↓
+                            class="success"
+                            class="error"
+                                 ↓
+                                 CSS
+                                   ↓
+                             .success / .error
+                                    ↓
+                              color Glow، Hover... */
+
+
+/* So:
+
+classList = A JavaScript tool for managing HTML classes.
+
+.success and .error = CSS class selectors.  */
+
+
+/* ============================================================
+   6. Result Cards
+   ============================================================ */
+
+
+/*
+   Container for the result cards.
+
+   Contains:
+   - Tip Amount
+   - Total Amount
+
+   Flexbox places the cards next to each other.
+*/
+.results-container {
+
+    /*
+       Use Flexbox.
+    */
+    display: flex;
+
+
+    /*
+       Space between the cards.
+    */
+    gap: 16px;
+
+
+    /*
+       Space above the result cards.
+    */
+    margin-top: 24px;
+}
+
+
+
+/* ============================================================
+   6.1. Individual Result Card
+   ============================================================ */
+
+
+/*
+   Each result card displays
+   one calculated value.
+
+   We use another layer of glass
+   for the infographic-style design.
+*/
+.result-card {
+
+    /*
+       Each card takes an equal
+       amount of available space.
+    */
+    flex: 1;
+
+
+    /*
+       Add space inside the card.
+    */
+    padding: 20px;
+
+
+    /*
+       Dark transparent glass background.
+
+       The low opacity allows the
+       main background to remain visible.
+    */
+    background: rgba(30, 30, 30, 0.18);
+
+
+    /*
+       Subtle white border.
+    */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+
+    /*
+       Asymmetric rounded corners
+       for a more graphical appearance.
+    */
+    border-radius: 20px 10px;
+
+
+    /*
+       Blur the background behind
+       the small glass card.
+    */
+    backdrop-filter: blur(50px);
+
+
+    /*
+       WebKit browser support.
+    */
+    -webkit-backdrop-filter: blur(50px);
+
+
+    /*
+       Soft floating shadow.
+    */
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.20);
+
+
+    /*
+       Smooth interaction animation.
+    */
+    transition: all 0.3s ease;
+}
+
+
+
+/* ============================================================
+   6.2. Result Card Hover
+   ============================================================ */
+
+
+/*
+   :hover applies when the mouse
+   pointer moves over a result card.
+*/
+.result-card:hover {
+
+    /*
+       Move the card slightly upward.
+    */
+    transform: translateY(-4px);
+
+
+    /*
+       Make the border slightly brighter.
+    */
+    border-color: rgba(255, 255, 255, 0.30);
+
+
+    /*
+       Increase the shadow.
+    */
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/* ============================================================
+   6.3. Result Label
+   ============================================================ */
+
+
+/*
+   Small text above the calculated value.
+*/
+.result-label {
+
+    /*
+       Remove the default paragraph margin.
+    */
+    margin: 0 0 12px;
+
+
+    /*
+       Warm Goldenrod color.
+    */
+    color: goldenrod;
+
+
+    /*
+       Make the label slightly stronger.
+    */
+    font-weight: 600;
+
+
+    /*
+       Comfortable text size.
+    */
+    font-size: 0.85rem;
+}
+
+
+
+/* ============================================================
+   6.4. Result Value
+   ============================================================ */
+
+
+/*
+   Large calculated number.
+
+   Example:
+
+   €15
+   €115
+*/
+.result-card h2 {
+
+    /*
+       Remove default heading margin.
+    */
+    margin: 0;
+
+
+    /*
+       Soft cream color.
+    */
+    color: #FAF8F3;
+
+
+    /*
+       Make the calculated value
+       visually important.
+    */
+    font-size: 2rem;
+
+
+    /*
+       Make the number bold.
+    */
+    font-weight: 700;
+
+
+    /*
+       Small text shadow improves readability.
+    */
+    text-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/* ============================================================
+   7. Responsive Design
+   ============================================================ */
+
+
+/*
+   Media Query changes the layout
+   for smaller screens.
+
+   max-width: 600px means:
+
+   If the screen width is 600px
+   or smaller, these styles apply.
+*/
+@media (max-width: 600px) {
+
+
+    /*
+       Reduce the horizontal space
+       around the calculator card.
+    */
+    .calculator-card {
+
+        /*
+           Prevent the card from touching
+           the edges of the screen.
+        */
+        width: calc(100% - 32px);
+
+
+        /*
+           Reduce internal spacing.
+        */
+        padding: 28px 22px;
+    }
+
+
+    /*
+       Make the title slightly smaller
+       on mobile devices.
+    */
+    .title {
+
+        font-size: 2rem;
+    }
+
+
+    /*
+       Stack the result cards vertically.
+    */
+    .results-container {
+
+        flex-direction: column;
+    }
+
+
+    /*
+       Make each result card
+       use the full available width.
+    */
+    .result-card {
+
+        width: 100%;
+    }
+}
