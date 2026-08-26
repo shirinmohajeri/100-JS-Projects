@@ -8,7 +8,7 @@ This project was created as part of my **100 JavaScript Projects** learning jour
 
 ## 📸 Preview
 
-![Tip Calculator Preview](./preview.png)
+![Tip Calculator Preview](./https://raw.githubusercontent.com/shirinmohajeri/100-JS-Projects/refs/heads/main/01-Tip-Calculator/1.jpg)
 
 ---
 
